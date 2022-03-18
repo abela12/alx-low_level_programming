@@ -1,5 +1,5 @@
 #include "main.h"
-// #include <stdio.h>
+#include <stdio.h>
 
 /**
  * _isupper - Check if paramter c represents an uppercase letter.
