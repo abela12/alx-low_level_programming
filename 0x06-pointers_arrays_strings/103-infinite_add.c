@@ -21,7 +21,7 @@ char *rot13(char *s)
 				s[i] = b[j];
 				break;
 			}
-		}
+	    }
 	}
 	return (s);
 }
