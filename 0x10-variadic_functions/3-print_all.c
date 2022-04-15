@@ -1,93 +1,51 @@
-#include "variadic_functions.h"
 #include <stdio.h>
 #include <stdarg.h>
+#include "variadic_functions.h"
 
 /**
- * pr_integer - Print an integer
- * @i: The list of numbers
- *
- * Return: Nothing
- */
-void pr_integer(va_list i)
-{
-  printf("%d", va_arg(i, int));
-}
-
-/**
- * pr_char - Print a char
- * @c: The list of numbers
- *
- * Return: Nothing
- */
-void pr_char(va_list c)
-{
-  printf("%c", va_arg(c, int));
-}
-
-/**
- * pr_float - Print a float
- * @f: The list of numbers
- *
- * Return: Nothing
- */
-void pr_float(va_list f)
-{
-  printf("%f", va_arg(f, double));
-}
-
-/**
- * pr_string - Print a string
- * @s: The list of numbers
- *
- * Return: Nothing
- */
-void pr_string(va_list s)
-{
-  char *str;
-
-  str = va_arg(s, char *);
-  if (str == NULL)
-    str = "(nil)";
-  printf("%s", str);
-}
-
-/**
- * print_all - Print numbers using a separator
- * @format: The format to print
- * @...: The list of values to print
- *
- * Return: Nothing
- */
+* print_all - print char, integer, float and string
+* @format: format
+*/
 void print_all(const char * const format, ...)
 {
-  char *separator = "";
-  va_list valist;
-  unsigned int k = 0, l = 0;
-  op_t ops[] = {
-    {"c", pr_char},
-    {"i", pr_integer},
-    {"f", pr_float},
-    {"s", pr_string},
-    {NULL, NULL}
-  };
+	va_list list;
+	unsigned int j = 0, start = 0;
+	char *p;
 
-  va_start(valist, format);
-
-  while (format != NULL && *(format + k) != '\0')
-    {
-      l = 0;
-      while (ops[l].op != NULL)
+	va_start(list, format);
+	while (format && format[j] != '\0')
 	{
-	  if (*(format + k) == ops[l].op[0])
-	    {
-	      printf("%s", separator);
-	      ops[l].f(valist);
-	      separator = ", ";
-	    }
-	  l++;
+		switch (format[j])
+		{ case 'c':
+			switch (start)
+			{ case 1: printf(", "); }
+			start = 1;
+			printf("%c", va_arg(list, int));
+			break;
+			case 'i':
+			switch (start)
+			{ case 1: printf(", "); }
+			start = 1;
+			printf("%i", va_arg(list, int));
+			break;
+		case 'f':
+			switch (start)
+			{ case 1: printf(", "); }
+			start = 1;
+			printf("%f", va_arg(list, double));
+			break;
+		case's':
+			switch (start)
+			{ case 1: printf(", "); }
+			start = 1;
+			p = va_arg(list, char*);
+			if (p)
+			{ printf("%s", p);
+			break; }
+			printf("%p", p);
+			break; }
+		j++;
 	}
-      k++;
-    }
-  printf("\n");
-  va_end(valist);
+	printf("\n");
+	va_end(list);
 }
