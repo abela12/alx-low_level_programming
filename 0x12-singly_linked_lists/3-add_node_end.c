@@ -1,44 +1,43 @@
-#include "list.h"
-
+#include "lists.h"
 /**
- * add_node_end - adds a new node at the end
- * @head: head of the node
- * @str: string to be duplicated
- * Return: new header
- */
+ * add_node_end - Add a new node at the end of a list.
+ * @head: Address of the first node of a list.
+ * @str: Address of the string to insert into the new node.
+ * Return: Address of the new node.
+ **/
+
 list_t *add_node_end(list_t **head, const char *str)
 {
-int i;
-list_t *t;
+	list_t *temp, *temp2;
+	unsigned int length = 0;
 
-if (head == NULL || str == NULL)
-return (NULL);
+	if (str == NULL)
+		return (NULL);
 
-t = malloc(sizeof(list_t));
+	temp = malloc(sizeof(list_t));
+	if (temp == NULL)
+		return (NULL);
 
-if (t == NULL)
-return (NULL);
+	temp->str = strdup(str);
+	if (temp->str == NULL)
+	{
+		free(temp);
+		return (NULL);
+	}
+	while (str[length])
+		length++;
+	temp->len = length;
+	temp->next = NULL;
 
-for (i = 0; str[i] != 0; i++)
-{
-}
-i++;
-t->str = malloc(i);
-if (t->str == NULL)
-{
-free(t);
-return (NULL);
-}
+	if (*head == NULL)
+	{
+		*head = temp;
+		return (temp);
+	}
 
-t->str = strdup(str);
-t->len = i - 1;
-t->next = NULL;
-
-for (; *head;)
-{
-head = &(*head)->next;
-}
-*head = t;
-
-return (t);
+	temp2 = *head;
+	while (temp2->next)
+		temp2 = temp2->next;
+	temp2->next = temp;
+	return (temp);
 }
