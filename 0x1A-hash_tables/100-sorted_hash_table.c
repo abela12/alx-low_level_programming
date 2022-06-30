@@ -8,11 +8,11 @@
  *  Return: Pointer to a newly created hash table
  */
 
-shash_table_t *shash_table_create(unsigned long int size)
+hash_table_t *hash_table_create(unsigned long int size)
 {
-	shash_table_t *create_table = NULL;
+	hash_table_t *create_table = NULL;
 
-	create_table = malloc(sizeof(shash_table_t));
+	create_table = malloc(sizeof(hash_table_t));
 
 	if (create_table == NULL)
 	{
@@ -32,7 +32,7 @@ shash_table_t *shash_table_create(unsigned long int size)
 
 
 /**
- *  shash_table_set - Set key/value in a hash table
+ *  hash_table_set - Set key/value in a hash table
  *
  *  @ht: The hash table to update
  *
@@ -43,7 +43,7 @@ shash_table_t *shash_table_create(unsigned long int size)
  *  Return: A pointer to the newly created hash table
  */
 
-int shash_table_set(shash_table_t *ht, const char *key, const char *value)
+int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int slot = 0;
 
@@ -87,7 +87,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 }
 
 /**
- *  shash_table_get - Retrieves a value associated with a key.
+ *  hash_table_get - Retrieves a value associated with a key.
  *
  *  @ht: The hash table you want to look into
  *
@@ -96,10 +96,10 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
  *  Return: A character pointer
  */
 
-char *shash_table_get(const shash_table_t *ht, const char *key)
+char *hash_table_get(const hash_table_t *ht, const char *key)
 {
 	unsigned long int slot = 0;
-	shash_node_t *head = NULL;
+	hash_node_t *head = NULL;
 
 	if (ht == NULL || key == NULL)
 	{
@@ -129,17 +129,17 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 }
 
 /**
- *  shash_table_print - Prints a hash table
+ *  hash_table_print - Prints a hash table
  *
  *  @ht: The hash table
  *
  *  Return: The key/value pair according to example
  */
 
-void shash_table_print(const shash_table_t *ht)
+void hash_table_print(const hash_table_t *ht)
 {
 	unsigned long int index = 0, flag = 0;
-	shash_node_t *head = NULL;
+	hash_node_t *head = NULL;
 
 	if (ht == NULL)
 	{
@@ -167,16 +167,16 @@ void shash_table_print(const shash_table_t *ht)
 }
 
 /**
- *  shash_table_print_rev - Prints a hash table
+ *  hash_table_print_rev - Prints a hash table
  *
  *  @ht: The hash table
  *
  *  Return: The key/value pair according to example in reverse
  */
 
-void shash_table_print_rev(const shash_table_t *ht)
+void hash_table_print_rev(const hash_table_t *ht)
 {
-	shash_node_t *head;
+	hash_node_t *head;
 
 	if (ht == NULL)
 	{
@@ -197,16 +197,16 @@ void shash_table_print_rev(const shash_table_t *ht)
 }
 
 /**
- *  shash_table_delete - Delete a hash table
+ *  hash_table_delete - Delete a hash table
  *
  *  @ht: The hash table
  *
  *  Return: Void
  */
 
-void shash_table_delete(shash_table_t *ht)
+void hash_table_delete(hash_table_t *ht)
 {
-	shash_node_t *head, *node;
+	hash_node_t *head, *node;
 
 	if (ht == NULL)
 	{
